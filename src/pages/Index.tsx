@@ -1,21 +1,6 @@
-import { useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 
-const SITE_URL = "https://data-analytics-enhancer--preview.poehali.dev/";
-
 export default function Index() {
-  const [copied, setCopied] = useState(false);
-
-  const handleShare = async () => {
-    if (navigator.share) {
-      await navigator.share({ title: "Vivienne Sabo", url: SITE_URL });
-    } else {
-      await navigator.clipboard.writeText(SITE_URL);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
-
   return (
     <main className="min-h-screen bg-white">
       {/* Navigation */}
@@ -34,12 +19,6 @@ export default function Index() {
             <a href="#contact" className="text-sm uppercase tracking-widest hover:text-red-600 transition-colors">
               Контакты
             </a>
-            <button
-              onClick={handleShare}
-              className="text-sm uppercase tracking-widest border border-black px-4 py-1.5 hover:bg-black hover:text-white transition-colors"
-            >
-              {copied ? "Скопировано ✓" : "Поделиться"}
-            </button>
           </div>
         </div>
       </nav>
