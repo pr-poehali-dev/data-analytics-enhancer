@@ -1,3 +1,5 @@
+import { QRCodeSVG } from "qrcode.react";
+
 export default function Index() {
   return (
     <main className="min-h-screen bg-white">
@@ -215,6 +217,22 @@ export default function Index() {
               </form>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* QR Section */}
+      <section className="py-16 px-4 md:px-8 bg-neutral-100">
+        <div className="container mx-auto flex flex-col items-center gap-6">
+          <h2 className="text-2xl font-bold tracking-tighter uppercase">Поделитесь сайтом</h2>
+          <div className="bg-white p-6 border-2 border-black">
+            <QRCodeSVG
+              value="https://data-analytics-enhancer--preview.poehali.dev/"
+              size={180}
+              fgColor="#000000"
+              bgColor="#ffffff"
+            />
+          </div>
+          <p className="text-sm uppercase tracking-widest text-neutral-500">viviennesabo.ru</p>
         </div>
       </section>
 
