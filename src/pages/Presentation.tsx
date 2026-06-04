@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const PRESENTATION_URL = "https://data-analytics-enhancer--preview.poehali.dev/presentation";
+
 const slides = [
   {
     id: 1,
@@ -92,13 +94,29 @@ export default function Presentation() {
 
   const slide = slides[current];
   const isLast = current === slides.length - 1;
+  const [copied, setCopied] = useState(false);
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      await navigator.share({ title: "Vivienne Sabo — Как создавался сайт", url: PRESENTATION_URL });
+    } else {
+      await navigator.clipboard.writeText(PRESENTATION_URL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
 
   return (
     <div className={`min-h-screen ${slide.bg} ${slide.textColor} transition-colors duration-500 flex flex-col`}>
       {/* Top bar */}
-      <div className="flex justify-between items-center px-8 py-6 border-b border-current opacity-20">
+      <div className="flex justify-between items-center px-8 py-6 border-b border-current opacity-60">
         <span className="text-xs uppercase tracking-widest font-bold">Vivienne Sabo</span>
-        <span className="text-xs uppercase tracking-widest">Как создавался сайт</span>
+        <button
+          onClick={handleShare}
+          className="text-xs uppercase tracking-widest font-bold border border-current px-4 py-2 hover:opacity-60 transition-opacity"
+        >
+          {copied ? "Скопировано ✓" : "Поделиться →"}
+        </button>
       </div>
 
       {/* Slide content */}
